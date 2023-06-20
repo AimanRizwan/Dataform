@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+
+    <form name="submit-to-google-sheet">
+     
+            <h3></h3>
+            <input type="date" name="Date"placeholder="Date" required>
+            <input type="text" name="Name" placeholder="Name" required>
+            <input type="number" name="Policy Number" placeholder="Policy Number" required>
+            <input type="number" name="Rs" placeholder="Rs." required>
+            <input type="phone" name="Phone" placeholder="Phone No." required>
+
+            <button id="btn" type="submit">Submit</button>
+            
+    </form>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzwcFpHS6IlSTLmGTRlVO0RL7fc3wkDWARQRez94EnProjb63OdmB5zrzklIT37p5Sh3w/exec'
+        const form = document.forms['submit-to-google-sheet']
+        //const Success =document.getElementById('Success');
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then( message => {
+                    alert("Message Sent Successfully")})
+                //  .then(response => {
+                //     Success.innerHTML="successfully submitted";
+                // })
+                // .then(response => console.log('Success!', response))
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+
+</body>
+
+</html>
